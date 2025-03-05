@@ -113,4 +113,31 @@ class GildedRoseTest {
         assertEquals(0, app.items[0].quality);
         assertEquals(-2, app.items[0].sellIn);
     }
+
+    @Test
+    void ConjuredQualityDecreases() {
+        Item[] items = new Item[]{new Item("Conjured", 2, 10)};
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(9, app.items[0].quality);
+        assertEquals(1, app.items[0].sellIn);
+    }
+
+    @Test
+    void ConjuredQualityDecreasesWithSellInZero() {
+        Item[] items = new Item[]{new Item("Conjured", 0, 10)};
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(8, app.items[0].quality);
+        assertEquals(-1, app.items[0].sellIn);
+    }
+
+    @Test
+    void ConjuredQualityDecreasesWithSellInNegative() {
+        Item[] items = new Item[]{new Item("Conjured", -1, 10)};
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(8, app.items[0].quality);
+        assertEquals(-2, app.items[0].sellIn);
+    }
 }
