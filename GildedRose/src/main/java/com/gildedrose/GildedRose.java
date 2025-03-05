@@ -22,22 +22,16 @@ class GildedRose {
             handleAgedBrie(item);
         } else if (item.name.equals(BACKSTAGE_PASSES)) {
             handleBackstagePasses(item);
-        } else {
+        } else if (!item.name.equals(SULFURAS)) {
             if (item.quality > 0) {
-                if (!item.name.equals(SULFURAS)) {
-                    item.quality--;
-                }
+                item.quality--;
             }
 
-            if (!item.name.equals(SULFURAS)) {
-                item.sellIn--;
-            }
+            item.sellIn--;
 
             if (item.sellIn < 0) {
                 if (item.quality > 0) {
-                    if (!item.name.equals(SULFURAS)) {
-                        item.quality--;
-                    }
+                    item.quality--;
                 }
             }
         }
