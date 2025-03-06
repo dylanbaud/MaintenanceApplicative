@@ -50,7 +50,6 @@ public class Game implements IGame {
                 System.out.println(currentPlayer + " is not getting out of the penalty box");
                 isGettingOutOfPenaltyBox = false;
             }
-
         } else {
             movePlayer(roll);
         }
@@ -64,12 +63,13 @@ public class Game implements IGame {
         System.out.println(currentPlayer
                 + "'s new location is "
                 + currentPlayer.getPlace());
-        System.out.println("The category is " + currentCategory());
         askQuestion();
     }
 
     private void askQuestion() {
-        switch (currentCategory()) {
+        String category = currentCategory();
+        System.out.println("The category is " + category);
+        switch (category) {
             case "Pop":
                 System.out.println(popQuestions.remove(0));
                 break;
@@ -86,7 +86,7 @@ public class Game implements IGame {
     }
 
     private String currentCategory() {
-        switch ((currentPlayer.getPlace() - 1) % 12) {
+        switch ((currentPlayer.getPlace() - 1)%4) {
             case 0:
             case 4:
             case 8:
@@ -115,19 +115,19 @@ public class Game implements IGame {
     public boolean handleCorrectAnswer() {
         if (currentPlayer.isInPenaltyBox()) {
             if (isGettingOutOfPenaltyBox) {
-                return answerWasCurrent();
+                return answerWasCorrect();
             } else {
                 changePlayer();
                 return true;
             }
 
         } else {
-            return answerWasCurrent();
+            return answerWasCorrect();
         }
     }
 
-    public boolean answerWasCurrent() {
-        System.out.println("Answer was current!!!!");
+    public boolean answerWasCorrect() {
+        System.out.println("Answer was correct!!!!");
         currentPlayer.setPurse(currentPlayer.getPurse() + 1);
         System.out.println(currentPlayer
                 + " now has "
