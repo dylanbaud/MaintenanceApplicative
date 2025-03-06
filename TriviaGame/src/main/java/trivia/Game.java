@@ -27,17 +27,14 @@ public class Game implements IGame {
         System.out.println("They have rolled a " + roll);
 
         if (currentPlayer.isInPenaltyBox()) {
-            if (roll % 2 != 0) {
+            isGettingOutOfPenaltyBox = roll % 2 != 0;
+            System.out.println(currentPlayer + " is " + (isGettingOutOfPenaltyBox ? "" : "not ") + "getting out of the penalty box");
+            if (isGettingOutOfPenaltyBox) {
                 currentPlayer.setInPenaltyBox(false);
-                isGettingOutOfPenaltyBox = true;
-                System.out.println(currentPlayer + " is getting out of the penalty box");
-
                 currentPlayer.movePlayer(roll);
                 questionManager.askQuestion(currentPlayer.getPlace());
-            } else {
-                System.out.println(currentPlayer + " is not getting out of the penalty box");
-                isGettingOutOfPenaltyBox = false;
             }
+
         } else {
             currentPlayer.movePlayer(roll);
             questionManager.askQuestion(currentPlayer.getPlace());
