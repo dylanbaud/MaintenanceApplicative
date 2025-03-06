@@ -1,9 +1,6 @@
 package com.gildedrose;
 
 class GildedRose {
-    private static final String AGED_BRIE = "Aged Brie";
-    private static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
-    private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
     Item[] items;
 
     public GildedRose(Item[] items) {
@@ -12,76 +9,7 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            handleItem(item);
-        }
-    }
-
-    public void handleItem(Item item) {
-
-        switch (item.name) {
-            case AGED_BRIE:
-                handleAgedBrie(item);
-                break;
-            case BACKSTAGE_PASSES:
-                handleBackstagePasses(item);
-                break;
-            case SULFURAS:
-                break;
-            default:
-                handleOtherItem(item);
-                break;
-        }
-    }
-
-    public void handleAgedBrie(Item item) {
-        if (item.quality < 50) {
-            item.quality++;
-        }
-
-        item.sellIn--;
-
-        if (item.sellIn < 0) {
-            if (item.quality < 50) {
-                item.quality++;
-            }
-        }
-    }
-
-    public void handleBackstagePasses(Item item) {
-        if (item.quality < 50) {
-            item.quality++;
-
-            if (item.sellIn < 11) {
-                if (item.quality < 50) {
-                    item.quality++;
-                }
-            }
-
-            if (item.sellIn < 6) {
-                if (item.quality < 50) {
-                    item.quality++;
-                }
-            }
-        }
-
-        item.sellIn--;
-
-        if (item.sellIn < 0) {
-            item.quality = 0;
-        }
-    }
-
-    public void handleOtherItem(Item item) {
-        if (item.quality > 0) {
-            item.quality--;
-        }
-
-        item.sellIn--;
-
-        if (item.sellIn < 0) {
-            if (item.quality > 0) {
-                item.quality--;
-            }
+            item.updateQuality();
         }
     }
 }

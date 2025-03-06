@@ -8,7 +8,7 @@ class GildedRoseTest {
 
     @Test
     void AgedBrieQualityIncreases() {
-        Item[] items = new Item[]{new Item("Aged Brie", 2, 10)};
+        Item[] items = new Item[]{new AgedBrie(2, 10)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(11, app.items[0].quality);
@@ -17,7 +17,7 @@ class GildedRoseTest {
 
     @Test
     void AgedBrieQualityIncreasesWithSellInZero() {
-        Item[] items = new Item[]{new Item("Aged Brie", 0, 10)};
+        Item[] items = new Item[]{new AgedBrie(0, 10)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(12, app.items[0].quality);
@@ -26,7 +26,7 @@ class GildedRoseTest {
 
     @Test
     void AgedBrieQualityIncreasesWithSellInNegative() {
-        Item[] items = new Item[]{new Item("Aged Brie", -1, 10)};
+        Item[] items = new Item[]{new AgedBrie(-1, 10)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(12, app.items[0].quality);
@@ -35,7 +35,7 @@ class GildedRoseTest {
 
     @Test
     void AgedBrieQualityIncreasesWithFullQuality() {
-        Item[] items = new Item[]{new Item("Aged Brie", 2, 50)};
+        Item[] items = new Item[]{new AgedBrie(2, 50)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(50, app.items[0].quality);
@@ -44,7 +44,7 @@ class GildedRoseTest {
 
     @Test
     void AgedBrieQualityIncreasesWithFourtyNineQuality() {
-        Item[] items = new Item[]{new Item("Aged Brie", 2, 49)};
+        Item[] items = new Item[]{new AgedBrie(2, 49)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(50, app.items[0].quality);
@@ -53,7 +53,7 @@ class GildedRoseTest {
 
     @Test
     void AgedBrieQualityIncreasesWithSellInZeroAndFullQuality() {
-        Item[] items = new Item[]{new Item("Aged Brie", 0, 50)};
+        Item[] items = new Item[]{new AgedBrie(0, 50)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(50, app.items[0].quality);
@@ -62,7 +62,7 @@ class GildedRoseTest {
 
     @Test
     void SulfurasQualityDoesNotChange() {
-        Item[] items = new Item[]{new Item("Sulfuras, Hand of Ragnaros", 2, 20)};
+        Item[] items = new Item[]{new Sulfuras(2, 20)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(20, app.items[0].quality);
@@ -71,7 +71,7 @@ class GildedRoseTest {
 
     @Test
     void SulfurasQualityDoesNotChangeWithSellInZero() {
-        Item[] items = new Item[]{new Item("Sulfuras, Hand of Ragnaros", 0, 20)};
+        Item[] items = new Item[]{new Sulfuras(0, 20)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(20, app.items[0].quality);
@@ -80,7 +80,7 @@ class GildedRoseTest {
 
     @Test
     void SulfurasQualityDoesNotChangeWithSellInNegative() {
-        Item[] items = new Item[]{new Item("Sulfuras, Hand of Ragnaros", -1, 20)};
+        Item[] items = new Item[]{new Sulfuras(-1, 20)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(20, app.items[0].quality);
@@ -89,7 +89,7 @@ class GildedRoseTest {
 
     @Test
     void SulfrasQualityDoesNotChangeWithZeroQualityAndSellInNegative() {
-        Item[] items = new Item[]{new Item("Sulfuras, Hand of Ragnaros", -1, 0)};
+        Item[] items = new Item[]{new Sulfuras(-1, 0)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(0, app.items[0].quality);
@@ -98,7 +98,7 @@ class GildedRoseTest {
 
     @Test
     void BackstagePassesQualityIncreases() {
-        Item[] items = new Item[]{new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20)};
+        Item[] items = new Item[]{new BackstagePasses(15, 20)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(21, app.items[0].quality);
@@ -107,7 +107,7 @@ class GildedRoseTest {
 
     @Test
     void BackstagePassesQualityIncreasesWithSellInTen() {
-        Item[] items = new Item[]{new Item("Backstage passes to a TAFKAL80ETC concert", 10, 20)};
+        Item[] items = new Item[]{new BackstagePasses(10, 20)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(22, app.items[0].quality);
@@ -116,7 +116,7 @@ class GildedRoseTest {
 
     @Test
     void BackstagePassesQualityIncreasesWithSellInFive() {
-        Item[] items = new Item[]{new Item("Backstage passes to a TAFKAL80ETC concert", 5, 20)};
+        Item[] items = new Item[]{new BackstagePasses(5, 20)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(23, app.items[0].quality);
@@ -125,7 +125,7 @@ class GildedRoseTest {
 
     @Test
     void BackstagePassesQualityIncreasesWithSellInZero() {
-        Item[] items = new Item[]{new Item("Backstage passes to a TAFKAL80ETC concert", 0, 20)};
+        Item[] items = new Item[]{new BackstagePasses(0, 20)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(0, app.items[0].quality);
@@ -134,7 +134,7 @@ class GildedRoseTest {
 
     @Test
     void BackstagePassesQualityIncreasesWithSellInNegative() {
-        Item[] items = new Item[]{new Item("Backstage passes to a TAFKAL80ETC concert", -1, 20)};
+        Item[] items = new Item[]{new BackstagePasses(-1, 20)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(0, app.items[0].quality);
@@ -143,7 +143,7 @@ class GildedRoseTest {
 
     @Test
     void BackstagePassesQualityIncreasesWithFullQuality() {
-        Item[] items = new Item[]{new Item("Backstage passes to a TAFKAL80ETC concert", 15, 50)};
+        Item[] items = new Item[]{new BackstagePasses(15, 50)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(50, app.items[0].quality);
@@ -152,7 +152,7 @@ class GildedRoseTest {
 
     @Test
     void BackstagePassesQualityIncreasesWithFourtyNineQuality() {
-        Item[] items = new Item[]{new Item("Backstage passes to a TAFKAL80ETC concert", 2, 49)};
+        Item[] items = new Item[]{new BackstagePasses(2, 49)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(50, app.items[0].quality);
@@ -161,7 +161,7 @@ class GildedRoseTest {
 
     @Test
     void OtherItemQualityDecreases() {
-        Item[] items = new Item[]{new Item("Item", 2, 10)};
+        Item[] items = new Item[]{new OtherItem("Item", 2, 10)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(9, app.items[0].quality);
@@ -170,7 +170,7 @@ class GildedRoseTest {
 
     @Test
     void OtherItemQualityDecreasesWithSellInZero() {
-        Item[] items = new Item[]{new Item("Item", 0, 10)};
+        Item[] items = new Item[]{new OtherItem("Item", 0, 10)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(8, app.items[0].quality);
@@ -179,7 +179,7 @@ class GildedRoseTest {
 
     @Test
     void OtherItemQualityDecreasesWithSellInNegative() {
-        Item[] items = new Item[]{new Item("Item", -1, 10)};
+        Item[] items = new Item[]{new OtherItem("Item", -1, 10)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(8, app.items[0].quality);
@@ -188,7 +188,7 @@ class GildedRoseTest {
 
     @Test
     void OtherItemQualityDecreasesWithZeroQuality() {
-        Item[] items = new Item[]{new Item("Item", 2, 0)};
+        Item[] items = new Item[]{new OtherItem("Item", 2, 0)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(0, app.items[0].quality);
@@ -196,8 +196,8 @@ class GildedRoseTest {
     }
 
     @Test
-    void OtherItemQualityDecreasesWithZeroQualityAndSellInNegative(){
-        Item[] items = new Item[]{new Item("Item", -1, 0)};
+    void OtherItemQualityDecreasesWithZeroQualityAndSellInNegative() {
+        Item[] items = new Item[]{new OtherItem("Item", -1, 0)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(0, app.items[0].quality);
