@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Game implements IGame {
     ArrayList<Player> players = new ArrayList<>();
     QuestionManager questionManager;
-
     Player currentPlayer;
     boolean isGettingOutOfPenaltyBox;
 
