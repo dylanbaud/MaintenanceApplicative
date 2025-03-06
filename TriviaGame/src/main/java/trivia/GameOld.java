@@ -162,6 +162,6 @@ public class GameOld implements IGame {
 
 
    private boolean didPlayerWin() {
-      return !(purses[currentPlayer] == 6);
+      return (purses[currentPlayer] == 6);
    }
 }

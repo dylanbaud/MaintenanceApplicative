@@ -119,7 +119,9 @@ public class Game implements IGame {
                 + " Gold Coins.");
 
         boolean winner = didPlayerWin();
-        changePlayer();
+        if (!winner) {
+            changePlayer();
+        }
         return winner;
     }
 
@@ -133,6 +135,6 @@ public class Game implements IGame {
 
 
     private boolean didPlayerWin() {
-        return (currentPlayer.getPurse() == 6);
+        return currentPlayer.getPurse() == 6;
     }
 }
