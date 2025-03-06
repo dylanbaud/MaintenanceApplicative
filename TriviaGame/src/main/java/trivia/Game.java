@@ -14,22 +14,21 @@ public class Game implements IGame {
 
     public boolean add(String playerName) {
         players.add(new Player(playerName));
+        if (currentPlayer == null) {
+            currentPlayer = players.get(0);
+        }
         System.out.println(playerName + " was added");
         System.out.println("They are player number " + players.size());
         return true;
     }
 
     public void roll(int roll) {
-
-        if (currentPlayer == null) {
-            currentPlayer = players.get(0);
-        }
-
         System.out.println(currentPlayer + " is the current player");
         System.out.println("They have rolled a " + roll);
 
         if (currentPlayer.isInPenaltyBox()) {
             if (roll % 2 != 0) {
+                currentPlayer.setInPenaltyBox(false);
                 isGettingOutOfPenaltyBox = true;
                 System.out.println(currentPlayer + " is getting out of the penalty box");
 
