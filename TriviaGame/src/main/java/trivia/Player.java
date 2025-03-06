@@ -48,6 +48,10 @@ public class Player {
         return name;
     }
 
+    public void incrementPurse(){
+        this.purse++;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

@@ -58,19 +58,19 @@ public class Game implements IGame {
     }
 
     private void askQuestion() {
-        String category = currentCategory();
+        Category category = currentCategory();
         System.out.println("The category is " + category);
         switch (category) {
-            case "Pop":
+            case POP:
                 System.out.println(popQuestions.remove(0));
                 break;
-            case "Science":
+            case SCIENCE:
                 System.out.println(scienceQuestions.remove(0));
                 break;
-            case "Sports":
+            case SPORTS:
                 System.out.println(sportsQuestions.remove(0));
                 break;
-            case "Rock":
+            case ROCK:
                 System.out.println(rockQuestions.remove(0));
                 break;
         }
@@ -79,13 +79,13 @@ public class Game implements IGame {
     private Category currentCategory() {
         switch ((currentPlayer.getPlace() - 1) % 4) {
             case 0:
-                return "Pop";
+                return Category.POP;
             case 1:
-                return "Science";
+                return Category.SCIENCE;
             case 2:
-                return "Sports";
+                return Category.SPORTS;
             default:
-                return "Rock";
+                return Category.ROCK;
         }
     }
 
@@ -112,7 +112,7 @@ public class Game implements IGame {
 
     public boolean answerWasCorrect() {
         System.out.println("Answer was correct!!!!");
-        currentPlayer.setPurse(currentPlayer.getPurse() + 1);
+        currentPlayer.incrementPurse();
         System.out.println(currentPlayer
                 + " now has "
                 + currentPlayer.getPurse()
@@ -133,6 +133,6 @@ public class Game implements IGame {
 
 
     private boolean didPlayerWin() {
-        return !(currentPlayer.getPurse() == 6);
+        return (currentPlayer.getPurse() == 6);
     }
 }
