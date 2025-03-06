@@ -8,6 +8,6 @@ public interface IGame {
 
 	boolean handleCorrectAnswer();
 
-	boolean handleWrongAnswer();
+	void handleWrongAnswer();
 
 }

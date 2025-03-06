@@ -38,10 +38,10 @@ public class PlayGame {
          if (correct) {
             winner = aGame.handleCorrectAnswer();
          } else {
-            winner = aGame.handleWrongAnswer();
+            aGame.handleWrongAnswer();
          }
 
-      } while (winner);
+      } while (!winner);
       System.out.println(">> Game won!");
    }
 

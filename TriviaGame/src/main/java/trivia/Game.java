@@ -31,34 +31,20 @@ public class Game implements IGame {
         if (currentPlayer.isInPenaltyBox()) {
             if (roll % 2 != 0) {
                 isGettingOutOfPenaltyBox = true;
-
                 System.out.println(currentPlayer + " is getting out of the penalty box");
 
                 currentPlayer.movePlayer(roll);
-                questionManager.askQuestion(currentCategory());
+                questionManager.askQuestion(currentPlayer.getPlace());
             } else {
                 System.out.println(currentPlayer + " is not getting out of the penalty box");
                 isGettingOutOfPenaltyBox = false;
             }
         } else {
             currentPlayer.movePlayer(roll);
-            questionManager.askQuestion(currentCategory());
+            questionManager.askQuestion(currentPlayer.getPlace());
         }
     }
 
-
-    private Category currentCategory() {
-        switch ((currentPlayer.getPlace() - 1) % 4) {
-            case 0:
-                return Category.POP;
-            case 1:
-                return Category.SCIENCE;
-            case 2:
-                return Category.SPORTS;
-            default:
-                return Category.ROCK;
-        }
-    }
 
     public void changePlayer() {
         if (players.indexOf(currentPlayer) + 1 == players.size()) {
@@ -96,11 +82,10 @@ public class Game implements IGame {
         return winner;
     }
 
-    public boolean handleWrongAnswer() {
+    public void handleWrongAnswer() {
         System.out.println("Question was incorrectly answered");
         System.out.println(currentPlayer + " was sent to the penalty box");
         currentPlayer.setInPenaltyBox(true);
         changePlayer();
-        return true;
     }
 }
