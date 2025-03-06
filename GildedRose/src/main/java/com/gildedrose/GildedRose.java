@@ -18,22 +18,18 @@ class GildedRose {
 
     public void handleItem(Item item) {
 
-        if (item.name.equals(AGED_BRIE)) {
-            handleAgedBrie(item);
-        } else if (item.name.equals(BACKSTAGE_PASSES)) {
-            handleBackstagePasses(item);
-        } else if (!item.name.equals(SULFURAS)) {
-            if (item.quality > 0) {
-                item.quality--;
-            }
-
-            item.sellIn--;
-
-            if (item.sellIn < 0) {
-                if (item.quality > 0) {
-                    item.quality--;
-                }
-            }
+        switch (item.name) {
+            case AGED_BRIE:
+                handleAgedBrie(item);
+                break;
+            case BACKSTAGE_PASSES:
+                handleBackstagePasses(item);
+                break;
+            case SULFURAS:
+                break;
+            default:
+                handleOtherItem(item);
+                break;
         }
     }
 
@@ -72,6 +68,20 @@ class GildedRose {
 
         if (item.sellIn < 0) {
             item.quality = 0;
+        }
+    }
+
+    public void handleOtherItem(Item item) {
+        if (item.quality > 0) {
+            item.quality--;
+        }
+
+        item.sellIn--;
+
+        if (item.sellIn < 0) {
+            if (item.quality > 0) {
+                item.quality--;
+            }
         }
     }
 }

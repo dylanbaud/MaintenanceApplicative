@@ -160,8 +160,8 @@ class GildedRoseTest {
     }
 
     @Test
-    void ConjuredQualityDecreases() {
-        Item[] items = new Item[]{new Item("Conjured", 2, 10)};
+    void OtherItemQualityDecreases() {
+        Item[] items = new Item[]{new Item("Item", 2, 10)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(9, app.items[0].quality);
@@ -169,8 +169,8 @@ class GildedRoseTest {
     }
 
     @Test
-    void ConjuredQualityDecreasesWithSellInZero() {
-        Item[] items = new Item[]{new Item("Conjured", 0, 10)};
+    void OtherItemQualityDecreasesWithSellInZero() {
+        Item[] items = new Item[]{new Item("Item", 0, 10)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(8, app.items[0].quality);
@@ -178,8 +178,8 @@ class GildedRoseTest {
     }
 
     @Test
-    void ConjuredQualityDecreasesWithSellInNegative() {
-        Item[] items = new Item[]{new Item("Conjured", -1, 10)};
+    void OtherItemQualityDecreasesWithSellInNegative() {
+        Item[] items = new Item[]{new Item("Item", -1, 10)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(8, app.items[0].quality);
@@ -187,8 +187,8 @@ class GildedRoseTest {
     }
 
     @Test
-    void ConjuredQualityDecreasesWithZeroQuality() {
-        Item[] items = new Item[]{new Item("Conjured", 2, 0)};
+    void OtherItemQualityDecreasesWithZeroQuality() {
+        Item[] items = new Item[]{new Item("Item", 2, 0)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(0, app.items[0].quality);
@@ -196,8 +196,8 @@ class GildedRoseTest {
     }
 
     @Test
-    void ConjuredQualityDecreasesWithZeroQualityAndSellInNegative(){
-        Item[] items = new Item[]{new Item("Conjured", -1, 0)};
+    void OtherItemQualityDecreasesWithZeroQualityAndSellInNegative(){
+        Item[] items = new Item[]{new Item("Item", -1, 0)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(0, app.items[0].quality);
