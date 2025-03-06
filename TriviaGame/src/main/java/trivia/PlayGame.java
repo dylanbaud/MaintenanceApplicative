@@ -28,7 +28,7 @@ public class PlayGame {
       System.out.println("\n\n--Starting game--");
 
 
-      boolean notAWinner;
+      boolean winner = false;
       do {
          int roll = readRoll();
          aGame.roll(roll);
@@ -36,12 +36,12 @@ public class PlayGame {
          System.out.print(">> Was the answer correct? [y/n] ");
          boolean correct = readYesNo();
          if (correct) {
-            notAWinner = aGame.handleCorrectAnswer();
+            winner = aGame.handleCorrectAnswer();
          } else {
-            notAWinner = aGame.wrongAnswer();
+            winner = aGame.handleWrongAnswer();
          }
 
-      } while (notAWinner);
+      } while (winner);
       System.out.println(">> Game won!");
    }
 

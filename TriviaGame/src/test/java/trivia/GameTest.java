@@ -51,7 +51,7 @@ public class GameTest {
 				aGame.roll(rand.nextInt(5) + 1);
 
 				if (rand.nextInt(9) == 7) {
-					aGame.wrongAnswer();
+					aGame.handleWrongAnswer();
 				} else {
 					winner = aGame.handleCorrectAnswer();
 				}

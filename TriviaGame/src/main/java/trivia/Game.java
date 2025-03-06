@@ -71,17 +71,17 @@ public class Game implements IGame {
     public boolean handleCorrectAnswer() {
         if (currentPlayer.isInPenaltyBox()) {
             if (isGettingOutOfPenaltyBox) {
-                return answerWasCorrect();
+                return correctAnswer();
             } else {
                 changePlayer();
                 return true;
             }
         } else {
-            return answerWasCorrect();
+            return correctAnswer();
         }
     }
 
-    public boolean answerWasCorrect() {
+    public boolean correctAnswer() {
         System.out.println("Answer was correct!!!!");
         currentPlayer.incrementPurse();
         System.out.println(currentPlayer
@@ -96,7 +96,7 @@ public class Game implements IGame {
         return winner;
     }
 
-    public boolean wrongAnswer() {
+    public boolean handleWrongAnswer() {
         System.out.println("Question was incorrectly answered");
         System.out.println(currentPlayer + " was sent to the penalty box");
         currentPlayer.setInPenaltyBox(true);
