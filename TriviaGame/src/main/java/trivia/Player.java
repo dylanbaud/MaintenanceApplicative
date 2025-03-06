@@ -48,7 +48,7 @@ public class Player {
         return name;
     }
 
-    public void incrementPurse(){
+    public void incrementPurse() {
         this.purse++;
     }
 
@@ -67,5 +67,9 @@ public class Player {
         System.out.println(name
                 + "'s new location is "
                 + getPlace());
+    }
+
+    public boolean didPlayerWin() {
+        return getPurse() == 6;
     }
 }

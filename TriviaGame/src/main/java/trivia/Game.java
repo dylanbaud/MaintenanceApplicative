@@ -1,26 +1,16 @@
 package trivia;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Game implements IGame {
     ArrayList<Player> players = new ArrayList<>();
-
-    LinkedList<String> popQuestions = new LinkedList<>();
-    LinkedList<String> scienceQuestions = new LinkedList<>();
-    LinkedList<String> sportsQuestions = new LinkedList<>();
-    LinkedList<String> rockQuestions = new LinkedList<>();
+    QuestionManager questionManager;
 
     Player currentPlayer;
     boolean isGettingOutOfPenaltyBox;
 
     public Game() {
-        for (int i = 0; i < 50; i++) {
-            popQuestions.addLast("Pop Question " + i);
-            scienceQuestions.addLast(("Science Question " + i));
-            sportsQuestions.addLast(("Sports Question " + i));
-            rockQuestions.addLast(("Rock Question " + i));
-        }
+        questionManager = new QuestionManager();
     }
 
     public boolean add(String playerName) {
@@ -46,35 +36,17 @@ public class Game implements IGame {
                 System.out.println(currentPlayer + " is getting out of the penalty box");
 
                 currentPlayer.movePlayer(roll);
-                askQuestion();
+                questionManager.askQuestion(currentCategory());
             } else {
                 System.out.println(currentPlayer + " is not getting out of the penalty box");
                 isGettingOutOfPenaltyBox = false;
             }
         } else {
             currentPlayer.movePlayer(roll);
-            askQuestion();
+            questionManager.askQuestion(currentCategory());
         }
     }
 
-    private void askQuestion() {
-        Category category = currentCategory();
-        System.out.println("The category is " + category);
-        switch (category) {
-            case POP:
-                System.out.println(popQuestions.remove(0));
-                break;
-            case SCIENCE:
-                System.out.println(scienceQuestions.remove(0));
-                break;
-            case SPORTS:
-                System.out.println(sportsQuestions.remove(0));
-                break;
-            case ROCK:
-                System.out.println(rockQuestions.remove(0));
-                break;
-        }
-    }
 
     private Category currentCategory() {
         switch ((currentPlayer.getPlace() - 1) % 4) {
@@ -118,7 +90,7 @@ public class Game implements IGame {
                 + currentPlayer.getPurse()
                 + " Gold Coins.");
 
-        boolean winner = didPlayerWin();
+        boolean winner = currentPlayer.didPlayerWin();
         if (!winner) {
             changePlayer();
         }
@@ -131,10 +103,5 @@ public class Game implements IGame {
         currentPlayer.setInPenaltyBox(true);
         changePlayer();
         return true;
-    }
-
-
-    private boolean didPlayerWin() {
-        return currentPlayer.getPurse() == 6;
     }
 }
