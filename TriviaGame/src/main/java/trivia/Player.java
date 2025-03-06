@@ -54,4 +54,14 @@ public class Player {
         Player player = (Player) o;
         return place == player.place && purse == player.purse && inPenaltyBox == player.inPenaltyBox && Objects.equals(name, player.name);
     }
+
+    public void movePlayer(int roll) {
+        setPlace(getPlace() + roll);
+        if (getPlace() > 12)
+            setPlace(getPlace() - 12);
+
+        System.out.println(name
+                + "'s new location is "
+                + getPlace());
+    }
 }

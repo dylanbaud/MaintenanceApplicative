@@ -45,25 +45,16 @@ public class Game implements IGame {
 
                 System.out.println(currentPlayer + " is getting out of the penalty box");
 
-                movePlayer(roll);
+                currentPlayer.movePlayer(roll);
+                askQuestion();
             } else {
                 System.out.println(currentPlayer + " is not getting out of the penalty box");
                 isGettingOutOfPenaltyBox = false;
             }
         } else {
-            movePlayer(roll);
+            currentPlayer.movePlayer(roll);
+            askQuestion();
         }
-    }
-
-    private void movePlayer(int roll) {
-        currentPlayer.setPlace(currentPlayer.getPlace() + roll);
-        if (currentPlayer.getPlace() > 12)
-            currentPlayer.setPlace(currentPlayer.getPlace() - 12);
-
-        System.out.println(currentPlayer
-                + "'s new location is "
-                + currentPlayer.getPlace());
-        askQuestion();
     }
 
     private void askQuestion() {
@@ -85,8 +76,8 @@ public class Game implements IGame {
         }
     }
 
-    private String currentCategory() {
-        switch ((currentPlayer.getPlace() - 1)%4) {
+    private Category currentCategory() {
+        switch ((currentPlayer.getPlace() - 1) % 4) {
             case 0:
                 return "Pop";
             case 1:
@@ -114,7 +105,6 @@ public class Game implements IGame {
                 changePlayer();
                 return true;
             }
-
         } else {
             return answerWasCorrect();
         }
