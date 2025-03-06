@@ -34,7 +34,6 @@ public class Game implements IGame {
                 currentPlayer.movePlayer(roll);
                 questionManager.askQuestion(currentPlayer.getPlace());
             }
-
         } else {
             currentPlayer.movePlayer(roll);
             questionManager.askQuestion(currentPlayer.getPlace());
