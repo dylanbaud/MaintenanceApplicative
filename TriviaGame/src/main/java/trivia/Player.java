@@ -52,22 +52,6 @@ public class Player {
         this.purse++;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Player player = (Player) o;
-        return place == player.place && purse == player.purse && inPenaltyBox == player.inPenaltyBox && Objects.equals(name, player.name);
-    }
-
-    public void movePlayer(int roll) {
-        setPlace(getPlace() + roll);
-        if (getPlace() > Game.CASES)
-            setPlace(getPlace() - Game.CASES);
-
-        System.out.println(name
-                + "'s new location is "
-                + getPlace());
-    }
 
     public boolean didPlayerWin() {
         return getPurse() == 6;

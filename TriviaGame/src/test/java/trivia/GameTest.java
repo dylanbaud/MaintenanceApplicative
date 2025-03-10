@@ -162,16 +162,16 @@ public class GameTest {
     }
 
     @Test
-    public void testChangePlayer(){
+    public void testNextPlayer(){
         Player player = game.currentPlayer;
-        game.changePlayer();
+        game.nextPlayer();
         assertNotEquals(player, game.currentPlayer);
     }
 
     @Test
-    public void testChangePlayerLast(){
+    public void testNextPlayerLast(){
         game.currentPlayer = game.players.get(2);
-        game.changePlayer();
+        game.nextPlayer();
         assertEquals(game.players.get(0), game.currentPlayer);
     }
 }

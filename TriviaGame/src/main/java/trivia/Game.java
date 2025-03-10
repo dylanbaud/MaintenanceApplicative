@@ -31,16 +31,26 @@ public class Game implements IGame {
             System.out.println(currentPlayer + " is " + (isGettingOutOfPenaltyBox ? "" : "not ") + "getting out of the penalty box");
             if (isGettingOutOfPenaltyBox) {
                 currentPlayer.setInPenaltyBox(false);
-                currentPlayer.movePlayer(roll);
+                movePlayer(roll);
                 questionManager.askQuestion(currentPlayer.getPlace());
             }
         } else {
-            currentPlayer.movePlayer(roll);
+            movePlayer(roll);
             questionManager.askQuestion(currentPlayer.getPlace());
         }
     }
 
-    public void changePlayer() {
+    public void movePlayer(int roll) {
+        currentPlayer.setPlace(currentPlayer.getPlace() + roll);
+        if (currentPlayer.getPlace() > Game.CASES)
+            currentPlayer.setPlace(currentPlayer.getPlace() - Game.CASES);
+
+        System.out.println(currentPlayer.getName()
+                + "'s new location is "
+                + currentPlayer.getPlace());
+    }
+
+    public void nextPlayer() {
         if (players.indexOf(currentPlayer) + 1 == players.size()) {
             currentPlayer = players.get(0);
         } else {
@@ -50,7 +60,7 @@ public class Game implements IGame {
 
     public boolean handleCorrectAnswer() {
         if (currentPlayer.isInPenaltyBox()) {
-            changePlayer();
+            nextPlayer();
             return false;
         } else {
             return correctAnswer();
@@ -67,7 +77,7 @@ public class Game implements IGame {
 
         boolean winner = currentPlayer.didPlayerWin();
         if (!winner) {
-            changePlayer();
+            nextPlayer();
         }
         return winner;
     }
@@ -76,6 +86,6 @@ public class Game implements IGame {
         System.out.println("Question was incorrectly answered");
         System.out.println(currentPlayer + " was sent to the penalty box");
         currentPlayer.setInPenaltyBox(true);
-        changePlayer();
+        nextPlayer();
     }
 }
