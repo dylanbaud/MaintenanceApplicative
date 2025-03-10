@@ -23,6 +23,6 @@ public class QuestionManager {
     }
 
     private Category currentCategory(int place) {
-        return Category.values()[(place - 1) % 4];
+        return Category.values()[(place - 1) % questions.size()];
     }
 }
