@@ -61,8 +61,8 @@ public class Player {
 
     public void movePlayer(int roll) {
         setPlace(getPlace() + roll);
-        if (getPlace() > 12)
-            setPlace(getPlace() - 12);
+        if (getPlace() > Game.CASES)
+            setPlace(getPlace() - Game.CASES);
 
         System.out.println(name
                 + "'s new location is "

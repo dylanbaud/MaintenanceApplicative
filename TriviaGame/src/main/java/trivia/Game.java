@@ -7,6 +7,7 @@ public class Game implements IGame {
     QuestionManager questionManager;
     Player currentPlayer;
     boolean isGettingOutOfPenaltyBox;
+    public static final int CASES = 12;
 
     public Game() {
         questionManager = new QuestionManager();
