@@ -36,6 +36,14 @@ public class GameTest {
     }
 
     @Test
+    public void testAddPlayerAlreadyExists() {
+        Game game = new Game();
+        game.addPlayer("Chet");
+        game.addPlayer("Chet");
+        assertEquals(1, game.players.size());
+    }
+
+    @Test
     public void testStartGameWithLessThanTwoPlayers() {
         Game game = new Game();
         game.addPlayer("Chet");

@@ -18,6 +18,12 @@ public class Game implements IGame {
             System.out.println("Game already started. Can't add new player");
             return;
         }
+        for (Player player : players) {
+            if (player.getName().equals(playerName)) {
+                System.out.println(playerName + " already exists");
+                return;
+            }
+        }
         players.add(new Player(playerName));
         System.out.println(playerName + " was added");
         System.out.println("They are player number " + players.size());
