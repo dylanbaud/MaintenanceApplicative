@@ -1,66 +1,177 @@
 
 package trivia;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Random;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class GameTest {
-	@Test
-	public void caracterizationTest() {
-		// runs 10.000 "random" games to see the output of old and new code mathces
-		for (int seed = 1; seed < 10_000; seed++) {
-			testSeed(seed, false);
-		}
-	}
 
-	private void testSeed(int seed, boolean printExpected) {
-		String expectedOutput = extractOutput(new Random(seed), new GameOld());
-		if (printExpected) {
-			System.out.println(expectedOutput);
-		}
-		String actualOutput = extractOutput(new Random(seed), new Game());
-		assertEquals(expectedOutput, actualOutput);
-	}
+    private Game game;
 
-	@Test
-	@Disabled("enable back and set a particular seed to see the output")
-	public void oneSeed() {
-		testSeed(1, true);
-	}
+    @BeforeEach
+    public void setUp() {
+        game = new Game();
+        game.add("Chet");
+        game.add("Pat");
+        game.add("Sue");
+    }
 
-	private String extractOutput(Random rand, IGame aGame) {
-		PrintStream old = System.out;
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		try (PrintStream inmemory = new PrintStream(baos)) {
-			// WARNING: System.out.println() doesn't work in this try {} as the sysout is captured and recorded in memory.
-			System.setOut(inmemory);
+    @Test
+    public void caracterizationTest() {
+        // runs 10.000 "random" games to see the output of old and new code mathces
+        for (int seed = 1; seed < 10_000; seed++) {
+            testSeed(seed, false);
+        }
+    }
 
-			aGame.add("Chet");
-			aGame.add("Pat");
-			aGame.add("Sue");
+    private void testSeed(int seed, boolean printExpected) {
+        String expectedOutput = extractOutput(new Random(seed), new GameOld());
+        if (printExpected) {
+            System.out.println(expectedOutput);
+        }
+        String actualOutput = extractOutput(new Random(seed), new Game());
+        assertEquals(expectedOutput, actualOutput);
+    }
 
-			boolean winner = false;
-			do {
-				aGame.roll(rand.nextInt(5) + 1);
+    @Test
+    @Disabled("enable back and set a particular seed to see the output")
+    public void oneSeed() {
+        testSeed(1, true);
+    }
 
-				if (rand.nextInt(9) == 7) {
-					aGame.handleWrongAnswer();
-				} else {
-					winner = aGame.handleCorrectAnswer();
-				}
+    private String extractOutput(Random rand, IGame aGame) {
+        PrintStream old = System.out;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try (PrintStream inmemory = new PrintStream(baos)) {
+            // WARNING: System.out.println() doesn't work in this try {} as the sysout is captured and recorded in memory.
+            System.setOut(inmemory);
 
-			} while (!winner);
-		} finally {
-			System.setOut(old);
-		}
+            aGame.add("Chet");
+            aGame.add("Pat");
+            aGame.add("Sue");
 
-		return new String(baos.toByteArray());
-	}
+            boolean winner = false;
+            do {
+                aGame.roll(rand.nextInt(5) + 1);
+
+                if (rand.nextInt(9) == 7) {
+                    aGame.handleWrongAnswer();
+                } else {
+                    winner = aGame.handleCorrectAnswer();
+                }
+
+            } while (!winner);
+        } finally {
+            System.setOut(old);
+        }
+
+        return new String(baos.toByteArray());
+    }
+
+
+    @Test
+    public void testAddPlayer() {
+        assertEquals(3, game.players.size());
+        assertEquals("Chet", game.players.get(0).getName());
+        assertEquals("Pat", game.players.get(1).getName());
+        assertEquals("Sue", game.players.get(2).getName());
+    }
+
+    @Test
+    public void testRoll() {
+        game.roll(2);
+        assertEquals(3, game.currentPlayer.getPlace());
+    }
+
+    @Test
+    public void testHandleCorrectAnswer() {
+        Player player = game.currentPlayer;
+        game.roll(2);
+        boolean winner = game.handleCorrectAnswer();
+        assertEquals(1, player.getPurse());
+        assertFalse(winner);
+    }
+
+    @Test
+    public void testHandleCorrectAnswerWinner() {
+        Player player = game.currentPlayer;
+        player.setPurse(5);
+        game.roll(2);
+        boolean winner = game.handleCorrectAnswer();
+        assertEquals(6, player.getPurse());
+        assertTrue(winner);
+    }
+
+    @Test
+    public void testHandleCorrectAnswerPenaltyBox() {
+        Player player = game.currentPlayer;
+        player.setInPenaltyBox(true);
+        game.roll(2);
+        boolean winner = game.handleCorrectAnswer();
+        assertEquals(0, player.getPurse());
+        assertFalse(winner);
+    }
+
+    @Test
+    public void testHandleCorrectAnswerPenaltyBoxAndGetOut() {
+        Player player = game.currentPlayer;
+        player.setInPenaltyBox(true);
+        game.roll(3);
+        game.handleCorrectAnswer();
+        assertEquals(1, player.getPurse());
+    }
+
+    @Test
+    public void testHandleWrongAnswer() {
+        Player player = game.currentPlayer;
+        game.roll(2);
+        game.handleWrongAnswer();
+        assertEquals(0, player.getPurse());
+        assertTrue(player.isInPenaltyBox());
+    }
+
+    @Test
+    public void testWinner(){
+        Player player = game.currentPlayer;
+        player.setPurse(6);
+        assertTrue(player.didPlayerWin());
+    }
+
+    @Test
+    public void testExitPenaltyBox(){
+        Player player = game.currentPlayer;
+        player.setInPenaltyBox(true);
+        game.roll(3);
+        assertFalse(player.isInPenaltyBox());
+    }
+
+    @Test
+    public void testNotExitPenaltyBox(){
+        Player player = game.currentPlayer;
+        player.setInPenaltyBox(true);
+        game.roll(2);
+        assertTrue(player.isInPenaltyBox());
+    }
+
+    @Test
+    public void testChangePlayer(){
+        Player player = game.currentPlayer;
+        game.changePlayer();
+        assertNotEquals(player, game.currentPlayer);
+    }
+
+    @Test
+    public void testChangePlayerLast(){
+        game.currentPlayer = game.players.get(2);
+        game.changePlayer();
+        assertEquals(game.players.get(0), game.currentPlayer);
+    }
 }
