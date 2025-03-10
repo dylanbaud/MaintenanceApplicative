@@ -108,12 +108,23 @@ public class GameTest {
     }
 
     @Test
-    public void testHandleWrongAnswer() {
+    public void testHandleTwoWrongAnswer() {
         Player player = game.currentPlayer;
         game.roll(2);
         game.handleWrongAnswer();
+        game.handleWrongAnswer();
         assertEquals(0, player.getPurse());
         assertTrue(player.isInPenaltyBox());
+    }
+
+    @Test
+    public void testHandleWrongAnswerAndCorrectAnswer() {
+        Player player = game.currentPlayer;
+        game.roll(2);
+        game.handleWrongAnswer();
+        game.handleCorrectAnswer();
+        assertEquals(0, player.getPurse());
+        assertFalse(player.isInPenaltyBox());
     }
 
     @Test
@@ -164,5 +175,23 @@ public class GameTest {
         game.currentPlayer.setPlace(11);
         game.movePlayer(2);
         assertEquals(1, game.currentPlayer.getPlace());
+    }
+
+    @Test
+    public void testCanRoll() {
+        game.lastChance = false;
+        assertTrue(game.canRoll());
+    }
+
+    @Test
+    public void testCanNotRollLastChance() {
+        game.lastChance = true;
+        assertFalse(game.canRoll());
+    }
+
+    @Test
+    public void testCanNotRollGameNotStarted() {
+        Game game = new Game();
+        assertFalse(game.canRoll());
     }
 }

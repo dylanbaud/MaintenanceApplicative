@@ -31,8 +31,10 @@ public class PlayGame {
 
         boolean winner = false;
         do {
-            int roll = readRoll();
-            aGame.roll(roll);
+            if (aGame.canRoll()) {
+                int roll = readRoll();
+                aGame.roll(roll);
+            }
 
             System.out.print(">> Was the answer correct? [y/n] ");
             boolean correct = readYesNo();

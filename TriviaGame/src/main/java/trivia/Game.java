@@ -8,6 +8,7 @@ public class Game implements IGame {
     Player currentPlayer;
     public static final int CASES = 12;
     public boolean gameStarted = false;
+    public boolean lastChance = false;
 
     public Game() {
         questionManager = new QuestionManager();
@@ -37,6 +38,10 @@ public class Game implements IGame {
         gameStarted = true;
         currentPlayer = players.get(0);
         return true;
+    }
+
+    public boolean canRoll() {
+        return (gameStarted && !lastChance);
     }
 
     public void roll(int roll) {
@@ -87,23 +92,34 @@ public class Game implements IGame {
 
     public boolean correctAnswer() {
         System.out.println("Answer was correct!!!!");
-        currentPlayer.incrementPurse();
-        System.out.println(currentPlayer
-                + " now has "
-                + currentPlayer.getPurse()
-                + " Gold Coins.");
-
-        boolean winner = currentPlayer.didPlayerWin();
-        if (!winner) {
+        if (!lastChance) {
+            currentPlayer.incrementPurse();
+            System.out.println(currentPlayer
+                    + " now has "
+                    + currentPlayer.getPurse()
+                    + " Gold Coins.");
+            boolean winner = currentPlayer.didPlayerWin();
+            if (!winner) {
+                nextPlayer();
+            }
+            return winner;
+        } else {
+            lastChance = false;
             nextPlayer();
+            return false;
         }
-        return winner;
     }
 
     public void handleWrongAnswer() {
         System.out.println("Question was incorrectly answered");
-        System.out.println(currentPlayer + " was sent to the penalty box");
-        currentPlayer.setInPenaltyBox(true);
-        nextPlayer();
+        if (lastChance) {
+            System.out.println(currentPlayer + " was sent to the penalty box");
+            currentPlayer.setInPenaltyBox(true);
+            lastChance = false;
+            nextPlayer();
+        } else {
+            questionManager.askQuestion(currentPlayer.getPlace());
+            lastChance = true;
+        }
     }
 }
