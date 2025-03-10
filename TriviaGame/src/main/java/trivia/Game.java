@@ -41,7 +41,6 @@ public class Game implements IGame {
         }
     }
 
-
     public void changePlayer() {
         if (players.indexOf(currentPlayer) + 1 == players.size()) {
             currentPlayer = players.get(0);
