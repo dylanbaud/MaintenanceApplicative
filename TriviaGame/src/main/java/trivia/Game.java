@@ -6,7 +6,6 @@ public class Game implements IGame {
     ArrayList<Player> players = new ArrayList<>();
     QuestionManager questionManager;
     Player currentPlayer;
-    boolean isGettingOutOfPenaltyBox;
     public static final int CASES = 12;
 
     public Game() {
@@ -28,7 +27,7 @@ public class Game implements IGame {
         System.out.println("They have rolled a " + roll);
 
         if (currentPlayer.isInPenaltyBox()) {
-            isGettingOutOfPenaltyBox = roll % 2 != 0;
+            boolean isGettingOutOfPenaltyBox = roll % 2 != 0;
             System.out.println(currentPlayer + " is " + (isGettingOutOfPenaltyBox ? "" : "not ") + "getting out of the penalty box");
             if (isGettingOutOfPenaltyBox) {
                 currentPlayer.setInPenaltyBox(false);
@@ -51,12 +50,8 @@ public class Game implements IGame {
 
     public boolean handleCorrectAnswer() {
         if (currentPlayer.isInPenaltyBox()) {
-            if (isGettingOutOfPenaltyBox) {
-                return correctAnswer();
-            } else {
-                changePlayer();
-                return true;
-            }
+            changePlayer();
+            return false;
         } else {
             return correctAnswer();
         }

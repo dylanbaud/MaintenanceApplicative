@@ -131,7 +131,7 @@ public class GameOld implements IGame {
             } else {
                 currentPlayer++;
                 if (currentPlayer == players.size()) currentPlayer = 0;
-                return true;
+                return false;
             }
 
         } else {
