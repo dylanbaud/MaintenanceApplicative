@@ -7,18 +7,29 @@ public class Game implements IGame {
     QuestionManager questionManager;
     Player currentPlayer;
     public static final int CASES = 12;
+    public boolean gameStarted = false;
 
     public Game() {
         questionManager = new QuestionManager();
     }
 
-    public boolean add(String playerName) {
-        players.add(new Player(playerName));
-        if (currentPlayer == null) {
-            currentPlayer = players.get(0);
+    public void addPlayer(String playerName) {
+        if (gameStarted) {
+            System.out.println("Game already started. Can't add new player");
+            return;
         }
+        players.add(new Player(playerName));
         System.out.println(playerName + " was added");
         System.out.println("They are player number " + players.size());
+    }
+
+    public boolean startGame() {
+        if (players.size() < 2 || players.size() > 6) {
+            System.out.println("Game can't start with less than 2 or more than 6 players");
+            return false;
+        }
+        gameStarted = true;
+        currentPlayer = players.get(0);
         return true;
     }
 
@@ -42,8 +53,9 @@ public class Game implements IGame {
 
     public void movePlayer(int roll) {
         currentPlayer.setPlace(currentPlayer.getPlace() + roll);
-        if (currentPlayer.getPlace() > Game.CASES)
+        if (currentPlayer.getPlace() > Game.CASES) {
             currentPlayer.setPlace(currentPlayer.getPlace() - Game.CASES);
+        }
 
         System.out.println(currentPlayer.getName()
                 + "'s new location is "

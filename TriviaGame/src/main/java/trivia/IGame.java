@@ -2,7 +2,9 @@ package trivia;
 
 public interface IGame {
 
-	boolean add(String playerName);
+	void addPlayer(String playerName);
+
+	boolean startGame();
 
 	void roll(int roll);
 

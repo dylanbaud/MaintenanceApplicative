@@ -1,12 +1,7 @@
 
 package trivia;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.util.Random;
-
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,63 +14,11 @@ public class GameTest {
     @BeforeEach
     public void setUp() {
         game = new Game();
-        game.add("Chet");
-        game.add("Pat");
-        game.add("Sue");
+        game.addPlayer("Chet");
+        game.addPlayer("Pat");
+        game.addPlayer("Sue");
+        game.startGame();
     }
-
-    @Test
-    public void caracterizationTest() {
-        // runs 10.000 "random" games to see the output of old and new code mathces
-        for (int seed = 1; seed < 10_000; seed++) {
-            testSeed(seed, false);
-        }
-    }
-
-    private void testSeed(int seed, boolean printExpected) {
-        String expectedOutput = extractOutput(new Random(seed), new GameOld());
-        if (printExpected) {
-            System.out.println(expectedOutput);
-        }
-        String actualOutput = extractOutput(new Random(seed), new Game());
-        assertEquals(expectedOutput, actualOutput);
-    }
-
-    @Test
-    @Disabled("enable back and set a particular seed to see the output")
-    public void oneSeed() {
-        testSeed(1, true);
-    }
-
-    private String extractOutput(Random rand, IGame aGame) {
-        PrintStream old = System.out;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try (PrintStream inmemory = new PrintStream(baos)) {
-            // WARNING: System.out.println() doesn't work in this try {} as the sysout is captured and recorded in memory.
-            System.setOut(inmemory);
-
-            aGame.add("Chet");
-            aGame.add("Pat");
-            aGame.add("Sue");
-
-            boolean winner = false;
-            do {
-                aGame.roll(rand.nextInt(5) + 1);
-
-                if (rand.nextInt(9) == 7) {
-                    aGame.handleWrongAnswer();
-                } else {
-                    winner = aGame.handleCorrectAnswer();
-                }
-
-            } while (!winner);
-        } finally {
-            System.setOut(old);
-        }
-
-        return new String(baos.toByteArray());
-    }
-
 
     @Test
     public void testAddPlayer() {
@@ -83,6 +26,33 @@ public class GameTest {
         assertEquals("Chet", game.players.get(0).getName());
         assertEquals("Pat", game.players.get(1).getName());
         assertEquals("Sue", game.players.get(2).getName());
+    }
+
+    @Test
+    public void testAddPlayerGameStarted() {
+        game.startGame();
+        game.addPlayer("John");
+        assertEquals(3, game.players.size());
+    }
+
+    @Test
+    public void testStartGameWithLessThanTwoPlayers() {
+        Game game = new Game();
+        game.addPlayer("Chet");
+        assertFalse(game.startGame());
+    }
+
+    @Test
+    public void testStartGameWithMoreThanSixPlayers() {
+        Game game = new Game();
+        game.addPlayer("Chet");
+        game.addPlayer("Pat");
+        game.addPlayer("Sue");
+        game.addPlayer("John");
+        game.addPlayer("Jane");
+        game.addPlayer("Doe");
+        game.addPlayer("Smith");
+        assertFalse(game.startGame());
     }
 
     @Test
@@ -139,14 +109,14 @@ public class GameTest {
     }
 
     @Test
-    public void testWinner(){
+    public void testWinner() {
         Player player = game.currentPlayer;
         player.setPurse(6);
         assertTrue(player.didPlayerWin());
     }
 
     @Test
-    public void testExitPenaltyBox(){
+    public void testExitPenaltyBox() {
         Player player = game.currentPlayer;
         player.setInPenaltyBox(true);
         game.roll(3);
@@ -154,7 +124,7 @@ public class GameTest {
     }
 
     @Test
-    public void testNotExitPenaltyBox(){
+    public void testNotExitPenaltyBox() {
         Player player = game.currentPlayer;
         player.setInPenaltyBox(true);
         game.roll(2);
@@ -162,16 +132,29 @@ public class GameTest {
     }
 
     @Test
-    public void testNextPlayer(){
+    public void testNextPlayer() {
         Player player = game.currentPlayer;
         game.nextPlayer();
         assertNotEquals(player, game.currentPlayer);
     }
 
     @Test
-    public void testNextPlayerLast(){
+    public void testNextPlayerLast() {
         game.currentPlayer = game.players.get(2);
         game.nextPlayer();
         assertEquals(game.players.get(0), game.currentPlayer);
+    }
+
+    @Test
+    public void testMovePlayer() {
+        game.movePlayer(2);
+        assertEquals(3, game.currentPlayer.getPlace());
+    }
+
+    @Test
+    public void testMovePlayerPassCases() {
+        game.currentPlayer.setPlace(11);
+        game.movePlayer(2);
+        assertEquals(1, game.currentPlayer.getPlace());
     }
 }
