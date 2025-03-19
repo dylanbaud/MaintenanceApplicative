@@ -1,10 +1,10 @@
 package event.periodic;
 
-public class Frequence {
+public class Frequency {
 
     private int day;
 
-    public Frequence(int day) {
+    public Frequency(int day) {
         this.day = day;
     }
 

@@ -5,7 +5,7 @@ import event.meeting.Meeting;
 import event.meeting.Participant;
 import event.meeting.Participants;
 import event.meeting.Place;
-import event.periodic.Frequence;
+import event.periodic.Frequency;
 import event.periodic.PeriodicEvent;
 
 import java.time.LocalDateTime;
@@ -67,7 +67,7 @@ public class MainMenuManager {
         String choice = scanner.nextLine();
         switch (choice) {
             case "1":
-                calendar.afficherEvenements();
+                calendar.displayEvents();
                 break;
             case "2":
                 displayEventsByMonth();
@@ -90,7 +90,7 @@ public class MainMenuManager {
         LocalDateTime startMonth = LocalDateTime.of(year, month, 1, 0, 0);
         LocalDateTime endMonth = startMonth.plusMonths(1).minusSeconds(1);
 
-        displayEventsList(calendar.eventsDansPeriode(startMonth, endMonth));
+        displayEventsList(calendar.eventsInPeriod(startMonth, endMonth));
     }
 
     private void displayEventsByWeek() {
@@ -106,7 +106,7 @@ public class MainMenuManager {
                 .withHour(0).withMinute(0);
         LocalDateTime endWeek = startWeek.plusDays(7).minusSeconds(1);
 
-        displayEventsList(calendar.eventsDansPeriode(startWeek, endWeek));
+        displayEventsList(calendar.eventsInPeriod(startWeek, endWeek));
     }
 
     private void displayEventsByDay() {
@@ -120,7 +120,7 @@ public class MainMenuManager {
         LocalDateTime startDay = LocalDateTime.of(year, month, day, 0, 0);
         LocalDateTime endDay = startDay.plusDays(1).minusSeconds(1);
 
-        displayEventsList(calendar.eventsDansPeriode(startDay, endDay));
+        displayEventsList(calendar.eventsInPeriod(startDay, endDay));
     }
 
     private void displayEventsList(List<Event> events) {
@@ -142,7 +142,7 @@ public class MainMenuManager {
         int duration = Integer.parseInt(scanner.nextLine());
 
         PersonalAppointment personalAppointment = new PersonalAppointment(new Title(title), homeManager.getCurrentUser(), dateTime, new Duration(duration));
-        calendar.ajouterEvent(personalAppointment);
+        calendar.addEvent(personalAppointment);
         System.out.println("Événement ajouté.");
     }
 
@@ -168,7 +168,7 @@ public class MainMenuManager {
 
         Meeting meeting = new Meeting(new Title(title), homeManager.getCurrentUser(), dateTime,
                 new Duration(duration), new Place(location), participants);
-        calendar.ajouterEvent(meeting);
+        calendar.addEvent(meeting);
         System.out.println("Événement ajouté.");
     }
 
@@ -180,8 +180,8 @@ public class MainMenuManager {
         int frequency = Integer.parseInt(scanner.nextLine());
 
         PeriodicEvent periodicEvent = new PeriodicEvent(new Title(title), homeManager.getCurrentUser(), dateTime,
-                new Duration(0), new Frequence(frequency));
-        calendar.ajouterEvent(periodicEvent);
+                new Duration(0), new Frequency(frequency));
+        calendar.addEvent(periodicEvent);
         System.out.println("Événement ajouté.");
     }
 

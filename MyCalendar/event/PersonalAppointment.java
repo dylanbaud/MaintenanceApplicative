@@ -11,6 +11,6 @@ public class PersonalAppointment extends Event {
     }
 
     public String description() {
-        return "RDV : " + title + " à " + dateDebut.toString();
+        return "RDV : " + title + " à " + startDate.toString();
     }
 }
