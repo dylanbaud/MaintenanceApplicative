@@ -8,11 +8,11 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class MainMenuManager {
-    private final CalendarManager calendar;
+    private final EventManager calendar;
     private final HomeManager homeManager;
     private final Scanner scanner;
 
-    public MainMenuManager(CalendarManager calendar, HomeManager homeManager) {
+    public MainMenuManager(EventManager calendar, HomeManager homeManager) {
         this.calendar = calendar;
         this.homeManager = homeManager;
         this.scanner = new Scanner(System.in);

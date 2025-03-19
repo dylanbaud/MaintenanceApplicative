@@ -1,6 +1,7 @@
 import user.Name;
 import user.Password;
 import user.User;
+import user.UserManager;
 
 import java.util.Scanner;
 

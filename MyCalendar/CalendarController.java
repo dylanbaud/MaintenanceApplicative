@@ -1,9 +1,12 @@
+import event.EventManager;
+import user.UserManager;
+
 public class CalendarController {
     private final HomeManager homeManager;
     private final MainMenuManager mainMenuManager;
 
     public CalendarController() {
-        CalendarManager calendar = new CalendarManager();
+        EventManager calendar = new EventManager();
         UserManager userManager = new UserManager();
         this.homeManager = new HomeManager(userManager);
         this.mainMenuManager = new MainMenuManager(calendar, homeManager);

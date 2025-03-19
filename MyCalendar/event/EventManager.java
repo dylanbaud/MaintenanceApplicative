@@ -1,23 +1,23 @@
-import event.*;
+package event;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalendarManager {
-    public List<Event> events;
+public class EventManager {
+    public Events events;
 
-    public CalendarManager() {
-        this.events = new ArrayList<>();
+    public EventManager() {
+        this.events = new Events();
     }
 
     public void ajouterEvent(Event e) {
-        events.add(e);
+        events.addEvent(e);
     }
 
     public List<Event> eventsDansPeriode(LocalDateTime debut, LocalDateTime fin) {
         List<Event> result = new ArrayList<>();
-        for (Event e : events) {
+        for (Event e : events.getEvents()) {
             if (e.type.equals(Type.PERIODIQUE)) {
                 Periodique periodique = (Periodique) e;
                 LocalDateTime temp = periodique.dateDebut;
@@ -47,7 +47,7 @@ public class CalendarManager {
     }
 
     public void afficherEvenements() {
-        for (Event e : events) {
+        for (Event e : events.getEvents()) {
             System.out.println(e.description());
         }
     }

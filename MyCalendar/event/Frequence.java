@@ -15,4 +15,8 @@ public class Frequence {
     public void setDay(int day) {
         this.day = day;
     }
+
+    public String toString() {
+        return day + "";
+    }
 }

@@ -1,15 +1,10 @@
-import user.Name;
-import user.Password;
-import user.User;
-
-import java.util.ArrayList;
-import java.util.List;
+package user;
 
 public class UserManager {
-    private final List<User> users;
+    private final Users users;
 
     public UserManager() {
-        this.users = new ArrayList<>();
+        this.users = new Users();
         loadDefaultUsers();
     }
 
@@ -19,19 +14,15 @@ public class UserManager {
     }
 
     public void registerUser(User user) {
-        users.add(user);
+        users.addUser(user);
     }
 
     public User authenticateUser(String name, String password) {
-        for (User user : users) {
+        for (User user : users.getUsers()) {
             if (user.getName().checkName(name) && user.getPassword().checkPassword(password)) {
                 return user;
             }
         }
         return null;
-    }
-
-    public List<User> getAllUsers() {
-        return new ArrayList<>(users);
     }
 }
