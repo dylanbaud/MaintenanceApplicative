@@ -2,13 +2,13 @@ package event.meeting;
 
 public class Place {
 
-    private final String lieu;
+    private final String place;
 
-    public Place(String lieu) {
-        this.lieu = lieu;
+    public Place(String place) {
+        this.place = place;
     }
 
     public String toString() {
-        return lieu;
+        return place;
     }
 }
