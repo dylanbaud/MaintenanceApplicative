@@ -9,9 +9,9 @@ public class CalendarManager {
         this.events = new ArrayList<>();
     }
 
-    public void ajouterEvent(Type type, Title title, Proprietaire proprietaire, LocalDateTime dateDebut, int dureeMinutes,
+    public void ajouterEvent(Type type, Title title, Proprietaire proprietaire, LocalDateTime dateDebut, Duree duree,
                              String lieu, String participants, int frequenceJours) {
-        Event e = new Event(type, title, proprietaire, dateDebut, dureeMinutes, lieu, participants, frequenceJours);
+        Event e = new Event(type, title, proprietaire, dateDebut, duree, lieu, participants, frequenceJours);
         events.add(e);
     }
 
@@ -35,8 +35,8 @@ public class CalendarManager {
     }
 
     public boolean conflit(Event e1, Event e2) {
-        LocalDateTime fin1 = e1.dateDebut.plusMinutes(e1.dureeMinutes);
-        LocalDateTime fin2 = e2.dateDebut.plusMinutes(e2.dureeMinutes);
+        LocalDateTime fin1 = e1.dateDebut.plusMinutes(e1.duree.getMinutes());
+        LocalDateTime fin2 = e2.dateDebut.plusMinutes(e2.duree.getMinutes());
 
         if (e1.type.equals(Type.PERIODIQUE) || e2.type.equals(Type.PERIODIQUE)) {
             return false; // Simplification abusive
