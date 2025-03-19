@@ -1,7 +1,4 @@
-import event.Duration;
-import event.Event;
-import event.Title;
-import event.Type;
+import event.*;
 import user.User;
 
 import java.time.LocalDateTime;
@@ -15,9 +12,7 @@ public class CalendarManager {
         this.events = new ArrayList<>();
     }
 
-    public void ajouterEvent(Type type, Title title, User proprietaire, LocalDateTime dateDebut, Duration duration,
-                             String lieu, String participants, int frequenceJours) {
-        Event e = new Event(type, title, proprietaire, dateDebut, duration, lieu, participants, frequenceJours);
+    public void ajouterEvent(Event e) {
         events.add(e);
     }
 
@@ -25,13 +20,14 @@ public class CalendarManager {
         List<Event> result = new ArrayList<>();
         for (Event e : events) {
             if (e.type.equals(Type.PERIODIQUE)) {
-                LocalDateTime temp = e.dateDebut;
+                Periodique periodique = (Periodique) e;
+                LocalDateTime temp = periodique.dateDebut;
                 while (temp.isBefore(fin)) {
                     if (!temp.isBefore(debut)) {
-                        result.add(e);
+                        result.add(periodique);
                         break;
                     }
-                    temp = temp.plusDays(e.frequenceJours);
+                    temp = temp.plusDays(periodique.frequenceJours);
                 }
             } else if (!e.dateDebut.isBefore(debut) && !e.dateDebut.isAfter(fin)) {
                 result.add(e);
