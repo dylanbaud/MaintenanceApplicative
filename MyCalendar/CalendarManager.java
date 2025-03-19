@@ -9,7 +9,7 @@ public class CalendarManager {
         this.events = new ArrayList<>();
     }
 
-    public void ajouterEvent(Type type, Title title, Proprietaire proprietaire, LocalDateTime dateDebut, Duree duree,
+    public void ajouterEvent(Type type, Title title, Utilisateur proprietaire, LocalDateTime dateDebut, Duree duree,
                              String lieu, String participants, int frequenceJours) {
         Event e = new Event(type, title, proprietaire, dateDebut, duree, lieu, participants, frequenceJours);
         events.add(e);
