@@ -1,3 +1,5 @@
+package manager;
+
 public class DisplayManager {
 
     public static void showLoginHeader() {

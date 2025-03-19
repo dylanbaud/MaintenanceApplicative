@@ -53,7 +53,7 @@ Tout comportement variant doit être géré par le polymorphisme via des interfa
 Le calendrier permet d'ajouter différents types d'événements, notamment :
 
 - Rendez-vous personnels : simples, avec une date, une heure de début, une durée, un titre.  
-- Réunions : avec des participants et un lieu.  
+- Réunions : avec des participants et un place.  
 - Événements périodiques : répétitifs à fréquence fixe (hebdomadaire, mensuelle, annuelle).  
 - Chaque événement peut générer une description textuelle spécifique à son type, sans utiliser de conditions explicites.
 

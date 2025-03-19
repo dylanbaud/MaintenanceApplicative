@@ -1,3 +1,5 @@
+package manager;
+
 import user.Name;
 import user.Password;
 import user.User;

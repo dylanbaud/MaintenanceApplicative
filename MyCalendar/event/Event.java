@@ -5,7 +5,6 @@ import user.User;
 import java.time.LocalDateTime;
 
 public abstract class Event {
-    public Type type;
     public Title title;
     public User owner;
     public LocalDateTime dateDebut;

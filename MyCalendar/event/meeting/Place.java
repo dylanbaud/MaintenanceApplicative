@@ -1,10 +1,10 @@
-package event;
+package event.meeting;
 
-public class Lieu {
+public class Place {
 
     private final String lieu;
 
-    public Lieu(String lieu) {
+    public Place(String lieu) {
         this.lieu = lieu;
     }
 

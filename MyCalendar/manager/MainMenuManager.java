@@ -1,8 +1,15 @@
+package manager;
+
 import event.*;
+import event.meeting.Meeting;
+import event.meeting.Participant;
+import event.meeting.Participants;
+import event.meeting.Place;
+import event.periodic.Frequence;
+import event.periodic.PeriodicEvent;
 
 import java.time.LocalDateTime;
 import java.time.temporal.WeekFields;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -134,8 +141,8 @@ public class MainMenuManager {
         System.out.print("Durée (en minutes) : ");
         int duration = Integer.parseInt(scanner.nextLine());
 
-        RDV rdv = new RDV(new Title(title), homeManager.getCurrentUser(), dateTime, new Duration(duration));
-        calendar.ajouterEvent(rdv);
+        PersonalAppointment personalAppointment = new PersonalAppointment(new Title(title), homeManager.getCurrentUser(), dateTime, new Duration(duration));
+        calendar.ajouterEvent(personalAppointment);
         System.out.println("Événement ajouté.");
     }
 
@@ -148,20 +155,20 @@ public class MainMenuManager {
         System.out.println("Lieu :");
         String location = scanner.nextLine();
 
-        List<Participant> participants = new ArrayList<>();
-        participants.add(new Participant(homeManager.getCurrentUser().getName().toString()));
+        Participants participants = new Participants();
+        participants.addParticipant(new Participant(homeManager.getCurrentUser().getName().toString()));
         System.out.println("Ajouter un participant ? (O / N)");
         while (scanner.nextLine().equalsIgnoreCase("O")) {
             System.out.print("Nom du participant : ");
             Participant participant = new Participant(scanner.nextLine());
-            participants.add(participant);
+            participants.addParticipant(participant);
             System.out.println("Participants actuel: " + participants);
             System.out.println("Ajouter un participant ? (O / N)");
         }
 
-        Reunion reunion = new Reunion(new Title(title), homeManager.getCurrentUser(), dateTime,
-                new Duration(duration), new Lieu(location), participants);
-        calendar.ajouterEvent(reunion);
+        Meeting meeting = new Meeting(new Title(title), homeManager.getCurrentUser(), dateTime,
+                new Duration(duration), new Place(location), participants);
+        calendar.ajouterEvent(meeting);
         System.out.println("Événement ajouté.");
     }
 
@@ -172,9 +179,9 @@ public class MainMenuManager {
         System.out.print("Frequence (en jours) : ");
         int frequency = Integer.parseInt(scanner.nextLine());
 
-        Periodique periodique = new Periodique(new Title(title), homeManager.getCurrentUser(), dateTime,
+        PeriodicEvent periodicEvent = new PeriodicEvent(new Title(title), homeManager.getCurrentUser(), dateTime,
                 new Duration(0), new Frequence(frequency));
-        calendar.ajouterEvent(periodique);
+        calendar.ajouterEvent(periodicEvent);
         System.out.println("Événement ajouté.");
     }
 

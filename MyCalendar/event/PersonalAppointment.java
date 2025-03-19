@@ -4,11 +4,10 @@ import user.User;
 
 import java.time.LocalDateTime;
 
-public class RDV extends Event {
+public class PersonalAppointment extends Event {
 
-    public RDV(Title title, User owner, LocalDateTime dateDebut, Duration duration) {
+    public PersonalAppointment(Title title, User owner, LocalDateTime dateDebut, Duration duration) {
         super(title, owner, dateDebut, duration);
-        this.type = Type.RDV_PERSONNEL;
     }
 
     public String description() {

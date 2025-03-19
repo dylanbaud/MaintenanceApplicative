@@ -1,15 +1,17 @@
-package event;
+package event.periodic;
 
+import event.Duration;
+import event.Event;
+import event.Title;
 import user.User;
 
 import java.time.LocalDateTime;
 
-public class Periodique extends Event {
+public class PeriodicEvent extends Event {
     public Frequence frequence;
 
-    public Periodique(Title title, User owner, LocalDateTime dateDebut, Duration duration, Frequence frequence) {
+    public PeriodicEvent(Title title, User owner, LocalDateTime dateDebut, Duration duration, Frequence frequence) {
         super(title, owner, dateDebut, duration);
-        this.type = Type.PERIODIQUE;
         this.frequence = frequence;
     }
 

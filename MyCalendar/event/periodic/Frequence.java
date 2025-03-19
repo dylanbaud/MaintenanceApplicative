@@ -1,4 +1,4 @@
-package event;
+package event.periodic;
 
 public class Frequence {
 
