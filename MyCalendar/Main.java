@@ -19,7 +19,7 @@ public class Main {
         users.add(new User(new Name("Roger"), new Password("Chat")));
         users.add(new User(new Name("Pierre"), new Password("KiRouhl")));
         User user = null;
-        String firstName = null;
+        String firstName;
         String password;
 
         while (true) {
@@ -199,18 +199,18 @@ public class Main {
                         System.out.println("Lieu :");
                         String lieu = scanner.nextLine();
 
-                        String participants = firstName;
-
-                        boolean encore = true;
-                        System.out.println("Ajouter un participant ? (oui / non)");
-                        while (scanner.nextLine().equals("oui")) {
+                        List<Participant> participants = new ArrayList<>();
+                        participants.add(new Participant(user.getName().toString()));
+                        System.out.println("Ajouter un participant ? (O / N)");
+                        while (scanner.nextLine().equalsIgnoreCase("O")) {
                             System.out.print("Participants : " + participants);
-                            participants += ", " + scanner.nextLine();
+                            Participant participant = new Participant(scanner.nextLine());
+                            participants.add(participant);
                         }
 
                         Reunion reunion = new Reunion(new Title(titre2), user,
                                 LocalDateTime.of(annee2, moisRdv2, jourRdv2, heure2, minute2), new Duration(duree2),
-                                lieu, participants);
+                                new Lieu(lieu), participants);
 
                         calendar.ajouterEvent(reunion);
 
@@ -235,7 +235,8 @@ public class Main {
                         int frequence = Integer.parseInt(scanner.nextLine());
 
                         Periodique periodique = new Periodique(new Title(titre3), user,
-                                LocalDateTime.of(annee3, moisRdv3, jourRdv3, heure3, minute3), new Duration(0), frequence);
+                                LocalDateTime.of(annee3, moisRdv3, jourRdv3, heure3, minute3),
+                                new Duration(0), new Frequence(frequence));
 
                         calendar.ajouterEvent(periodique);
 
