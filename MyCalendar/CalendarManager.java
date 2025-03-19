@@ -26,7 +26,7 @@ public class CalendarManager {
                         result.add(periodique);
                         break;
                     }
-                    temp = temp.plusDays(periodique.frequenceJours);
+                    temp = temp.plusDays(periodique.frequence.getDay());
                 }
             } else if (!e.dateDebut.isBefore(debut) && !e.dateDebut.isAfter(fin)) {
                 result.add(e);

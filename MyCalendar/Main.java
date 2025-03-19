@@ -203,9 +203,11 @@ public class Main {
                         participants.add(new Participant(user.getName().toString()));
                         System.out.println("Ajouter un participant ? (O / N)");
                         while (scanner.nextLine().equalsIgnoreCase("O")) {
-                            System.out.print("Participants : " + participants);
+                            System.out.print("Nom du participant : ");
                             Participant participant = new Participant(scanner.nextLine());
                             participants.add(participant);
+                            System.out.println("Participants actuel: " + participants);
+                            System.out.println("Ajouter un participant ? (O / N)");
                         }
 
                         Reunion reunion = new Reunion(new Title(titre2), user,
