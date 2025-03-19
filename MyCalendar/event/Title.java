@@ -1,3 +1,5 @@
+package event;
+
 public class Title {
 
     private final String title;

@@ -1,10 +1,10 @@
-import java.util.Objects;
+package event;
 
-public class Duree {
+public class Duration {
 
     private int minutes;
 
-    public Duree(int minutes) {
+    public Duration(int minutes) {
         this.minutes = minutes;
     }
 

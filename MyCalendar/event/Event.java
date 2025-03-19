@@ -1,22 +1,26 @@
+package event;
+
+import user.User;
+
 import java.time.LocalDateTime;
 
 public class Event {
     public Type type;
     public Title title;
-    public Utilisateur proprietaire;
+    public User owner;
     public LocalDateTime dateDebut;
-    public Duree duree;
+    public Duration duration;
     public String lieu; // utilisé seulement pour REUNION
     public String participants; // séparés par virgules (pour REUNION uniquement)
     public int frequenceJours; // uniquement pour PERIODIQUE
 
-    public Event(Type type, Title title, Utilisateur proprietaire, LocalDateTime dateDebut, Duree duree,
+    public Event(Type type, Title title, User owner, LocalDateTime dateDebut, Duration duration,
                  String lieu, String participants, int frequenceJours) {
         this.type = type;
         this.title = title;
-        this.proprietaire = proprietaire;
+        this.owner = owner;
         this.dateDebut = dateDebut;
-        this.duree = duree;
+        this.duration = duration;
         this.lieu = lieu;
         this.participants = participants;
         this.frequenceJours = frequenceJours;

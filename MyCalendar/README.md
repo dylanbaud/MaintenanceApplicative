@@ -87,7 +87,7 @@ Respect strict des contraintes techniques :
 
 ## 🚀 Suggestions d’évolution ultérieure possible (non obligatoire mais bonus) :
 - Sérialisation/Désérialisation vers JSON. **+1** 
-- Ajout d'une interface utilisateur minimale. **+3**
+- Ajout d'une interface user minimale. **+3**
 - Une idée, ben go, fait des beaux commits et je verrais bien ce que ça vaut. **+X**
 
 **Rappel: Un bonus est un bonus, le projet, hors bonus, est noté sur 20. Les bonus permettent juste de récuppérer des points potentiellement perdus.**
