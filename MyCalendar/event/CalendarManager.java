@@ -3,10 +3,10 @@ package event;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class EventManager {
+public class CalendarManager {
     public Events events;
 
-    public EventManager() {
+    public CalendarManager() {
         this.events = new Events();
     }
 
