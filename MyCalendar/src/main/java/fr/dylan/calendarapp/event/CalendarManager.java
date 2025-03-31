@@ -35,4 +35,8 @@ public class CalendarManager {
     public void removeEvent(UUID eventId) {
         events.removeEvent(eventId);
     }
+
+    public Event getEvent(UUID eventId) {
+        return events.getEvent(eventId);
+    }
 }

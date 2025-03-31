@@ -24,4 +24,13 @@ public class Events {
         events.removeIf(event -> event.getId().equals(uuid));
     }
 
+    public Event getEvent(UUID uuid) {
+        for (Event event : events) {
+            if (event.getId().equals(uuid)) {
+                return event;
+            }
+        }
+        return null;
+    }
+
 }

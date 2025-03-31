@@ -21,7 +21,6 @@ public class UserManager {
 
     public void registerUser(User user) {
         users.addUser(user);
-        this.user = user;
     }
 
     public boolean authenticateUser(String name, String password) {
