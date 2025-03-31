@@ -2,7 +2,6 @@ package fr.dylan.calendarapp.logged;
 
 import fr.dylan.calendarapp.event.CalendarManager;
 import fr.dylan.calendarapp.event.Duration;
-import fr.dylan.calendarapp.event.PersonalAppointment;
 import fr.dylan.calendarapp.event.Title;
 import fr.dylan.calendarapp.event.conference.Conference;
 import fr.dylan.calendarapp.event.conference.Speaker;
@@ -30,9 +29,15 @@ public class addConference extends AddEvent {
         String description = scanner.nextLine();
         System.out.print("Nom du conférencier : ");
         String speaker = scanner.nextLine();
+
         Conference conference = new Conference(new Title(title), userManager.getLoggedInUser(), dateTime, new Duration(duration), new Topic(description), new Speaker(speaker));
-        calendar.addEvent(conference);
-        System.out.println("Événement ajouté.");
+
+        try {
+            calendar.addEvent(conference);
+            System.out.println("Événement ajouté.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erreur : " + e.getMessage());
+        }
     }
 
     @Override

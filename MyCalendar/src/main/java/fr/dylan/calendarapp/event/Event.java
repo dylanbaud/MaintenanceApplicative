@@ -23,4 +23,9 @@ public abstract class Event {
         return !startDate.isBefore(start) && !startDate.isAfter(end);
     }
 
+    public boolean overlapsWith(Event other) {
+        LocalDateTime thisEnd = this.startDate.plus(this.duration.toPeriod());
+        LocalDateTime otherEnd = other.startDate.plus(other.duration.toPeriod());
+        return this.startDate.isBefore(otherEnd) && thisEnd.isAfter(other.startDate);
+    }
 }

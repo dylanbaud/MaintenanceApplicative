@@ -42,8 +42,13 @@ public class AddMeeting extends AddEvent {
 
         Meeting meeting = new Meeting(new Title(title), userManager.getLoggedInUser(), dateTime,
                 new Duration(duration), new Place(location), participants);
-        calendar.addEvent(meeting);
-        System.out.println("Événement ajouté.");
+
+        try {
+            calendar.addEvent(meeting);
+            System.out.println("Événement ajouté.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erreur : " + e.getMessage());
+        }
     }
 
     @Override

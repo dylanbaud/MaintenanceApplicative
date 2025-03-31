@@ -11,6 +11,11 @@ public class CalendarManager {
     }
 
     public void addEvent(Event e) {
+        for (Event existingEvent : events.getEvents()) {
+            if (existingEvent.overlapsWith(e)) {
+                throw new IllegalArgumentException("Conflit détecté avec un événement existant.");
+            }
+        }
         events.addEvent(e);
     }
 

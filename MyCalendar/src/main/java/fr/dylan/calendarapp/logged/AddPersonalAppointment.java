@@ -25,8 +25,13 @@ public class AddPersonalAppointment extends AddEvent {
         int duration = Integer.parseInt(scanner.nextLine());
 
         PersonalAppointment personalAppointment = new PersonalAppointment(new Title(title), userManager.getLoggedInUser(), dateTime, new Duration(duration));
-        calendar.addEvent(personalAppointment);
-        System.out.println("Événement ajouté.");
+
+        try {
+            calendar.addEvent(personalAppointment);
+            System.out.println("Événement ajouté.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erreur : " + e.getMessage());
+        }
     }
 
     @Override

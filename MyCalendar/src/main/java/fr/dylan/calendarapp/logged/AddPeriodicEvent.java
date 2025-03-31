@@ -27,8 +27,13 @@ public class AddPeriodicEvent extends AddEvent {
 
         PeriodicEvent periodicEvent = new PeriodicEvent(new Title(title), userManager.getLoggedInUser(), dateTime,
                 new Duration(0), new Frequency(frequency));
-        calendar.addEvent(periodicEvent);
-        System.out.println("Événement ajouté.");
+
+        try {
+            calendar.addEvent(periodicEvent);
+            System.out.println("Événement ajouté.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erreur : " + e.getMessage());
+        }
     }
 
     @Override
