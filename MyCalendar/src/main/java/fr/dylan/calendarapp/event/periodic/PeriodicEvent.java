@@ -16,7 +16,7 @@ public class PeriodicEvent extends Event {
     }
 
     public String description() {
-        return "Événement périodique : " + title + " tous les " + frequency + " jours";
+        return "Événement périodique : " + title + " tous les " + frequency + " jours" + " (" + getId() + ")";
     }
 
     public boolean isInPeriod(LocalDateTime start, LocalDateTime end) {

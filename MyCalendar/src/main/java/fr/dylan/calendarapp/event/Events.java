@@ -2,6 +2,7 @@ package fr.dylan.calendarapp.event;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Events {
 
@@ -19,8 +20,8 @@ public class Events {
         return events;
     }
 
-    public void removeEvent(Event e) {
-        events.remove(e);
+    public void removeEvent(UUID uuid) {
+        events.removeIf(event -> event.getId().equals(uuid));
     }
 
 }

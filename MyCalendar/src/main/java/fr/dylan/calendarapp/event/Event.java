@@ -3,18 +3,25 @@ package fr.dylan.calendarapp.event;
 import fr.dylan.calendarapp.user.User;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public abstract class Event {
+    private final UUID id;
     public Title title;
     public User owner;
     public LocalDateTime startDate;
     public Duration duration;
 
     public Event(Title title, User owner, LocalDateTime startDate, Duration duration) {
+        this.id = UUID.randomUUID();
         this.title = title;
         this.owner = owner;
         this.startDate = startDate;
         this.duration = duration;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public abstract String description();

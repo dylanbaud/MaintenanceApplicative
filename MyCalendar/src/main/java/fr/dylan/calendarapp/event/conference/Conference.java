@@ -16,8 +16,9 @@ public class Conference extends Event {
         this.topic = topic;
         this.speaker = speaker;
     }
+
     @Override
     public String description() {
-        return "Conférence sur " + topic + " par " + speaker;
+        return "Conférence sur " + topic + " par " + speaker + " (" + getId() + ")";
     }
 }

@@ -2,6 +2,7 @@ package fr.dylan.calendarapp.event;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 public class CalendarManager {
     public Events events;
@@ -29,5 +30,9 @@ public class CalendarManager {
         for (Event e : events.getEvents()) {
             System.out.println(e.description());
         }
+    }
+
+    public void removeEvent(UUID eventId) {
+        events.removeEvent(eventId);
     }
 }

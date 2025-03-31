@@ -38,6 +38,7 @@ public class ActionManager {
                 new AddPeriodicEvent(calendar, userManager),
                 new AddPersonalAppointment(calendar, userManager),
                 new addConference(calendar, userManager),
+                new DeleteEvent(calendar),
                 new Logout(this, userManager)
         )), userManager);
         menus.add(loggedMenu);

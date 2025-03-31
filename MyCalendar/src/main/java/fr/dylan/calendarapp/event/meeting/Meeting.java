@@ -18,6 +18,6 @@ public class Meeting extends Event {
     }
 
     public String description() {
-        return "Réunion : " + title + " à " + place + " avec " + participants;
+        return "Réunion : " + title + " à " + place + " avec " + participants + " (" + getId() + ")";
     }
 }
