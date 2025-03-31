@@ -2,10 +2,7 @@ package fr.dylan.calendarapp.action;
 
 import fr.dylan.calendarapp.display.*;
 import fr.dylan.calendarapp.event.CalendarManager;
-import fr.dylan.calendarapp.logged.AddMeeting;
-import fr.dylan.calendarapp.logged.AddPeriodicEvent;
-import fr.dylan.calendarapp.logged.AddPersonalAppointment;
-import fr.dylan.calendarapp.logged.DisplayEvents;
+import fr.dylan.calendarapp.logged.*;
 import fr.dylan.calendarapp.menu.*;
 import fr.dylan.calendarapp.not_logged.CreateAccount;
 import fr.dylan.calendarapp.not_logged.Login;
@@ -40,6 +37,7 @@ public class ActionManager {
                 new AddMeeting(calendar, userManager),
                 new AddPeriodicEvent(calendar, userManager),
                 new AddPersonalAppointment(calendar, userManager),
+                new addConference(calendar, userManager),
                 new Logout(this, userManager)
         )), userManager);
         menus.add(loggedMenu);
